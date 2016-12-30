@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.td.task.dao.TdTaskDao">
+    
+	<sql id="tdTaskColumns">
+		a.id AS "id",
+		a.task_content AS "taskContent",
+		a.four_quadrant AS "fourQuadrant",
+		a.begin_date AS "beginDate",
+		a.end_date AS "endDate",
+		a.location_group AS "locationGroup",
+		a.location_project AS "locationProject",
+		a.task_label AS "taskLabel",
+		a.task_site AS "taskSite",
+		a.task_status AS "taskStatus",
+		a.is_remind AS "isRemind",
+		a.is_repeat AS "isRepeat",
+		a.task_remarks AS "taskRemarks",
+		a.task_summary AS "taskSummary",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag"
+	</sql>
+	
+	<sql id="tdTaskJoins">
+	</sql>
+    
+	<select id="get" resultType="TdTask">
+		SELECT 
+			<include refid="tdTaskColumns"/>
+		FROM td_task a
+		<include refid="tdTaskJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="TdTask">
+		SELECT 
+			<include refid="tdTaskColumns"/>
+		FROM td_task a
+		<include refid="tdTaskJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="taskContent != null and taskContent != ''">
+				AND a.task_content LIKE 
+					<if test="dbName == 'oracle'">'%'||#{taskContent}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{taskContent}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{taskContent},'%')</if>
+			</if>
+			<if test="fourQuadrant != null and fourQuadrant != ''">
+				AND a.four_quadrant = #{fourQuadrant}
+			</if>
+			<if test="beginDate != null and beginDate != ''">
+				AND a.begin_date = #{beginDate}
+			</if>
+			<if test="locationGroup != null and locationGroup != ''">
+				AND a.location_group = #{locationGroup}
+			</if>
+			<if test="locationProject != null and locationProject != ''">
+				AND a.location_project = #{locationProject}
+			</if>
+			<if test="taskStatus != null and taskStatus != ''">
+				AND a.task_status = #{taskStatus}
+			</if>
+			<if test="isRemind != null and isRemind != ''">
+				AND a.is_remind = #{isRemind}
+			</if>
+			<if test="isRepeat != null and isRepeat != ''">
+				AND a.is_repeat = #{isRepeat}
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="TdTask">
+		SELECT 
+			<include refid="tdTaskColumns"/>
+		FROM td_task a
+		<include refid="tdTaskJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO td_task(
+			id,
+			task_content,
+			four_quadrant,
+			begin_date,
+			end_date,
+			location_group,
+			location_project,
+			task_label,
+			task_site,
+			task_status,
+			is_remind,
+			is_repeat,
+			task_remarks,
+			task_summary,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			del_flag
+		) VALUES (
+			#{id},
+			#{taskContent},
+			#{fourQuadrant},
+			#{beginDate},
+			#{endDate},
+			#{locationGroup},
+			#{locationProject},
+			#{taskLabel},
+			#{taskSite},
+			#{taskStatus},
+			#{isRemind},
+			#{isRepeat},
+			#{taskRemarks},
+			#{taskSummary},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlag}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE td_task SET 	
+			task_content = #{taskContent},
+			four_quadrant = #{fourQuadrant},
+			begin_date = #{beginDate},
+			end_date = #{endDate},
+			location_group = #{locationGroup},
+			location_project = #{locationProject},
+			task_label = #{taskLabel},
+			task_site = #{taskSite},
+			task_status = #{taskStatus},
+			is_remind = #{isRemind},
+			is_repeat = #{isRepeat},
+			task_remarks = #{taskRemarks},
+			task_summary = #{taskSummary},
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE td_task SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+</mapper>
