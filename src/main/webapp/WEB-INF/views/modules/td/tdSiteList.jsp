@@ -38,8 +38,6 @@
 			<tr>
 				<th>序号</th>
 				<th>地点名称</th>
-				<th>更新时间</th>
-				<th>备注信息</th>
 				<shiro:hasPermission name="td:tdSite:edit"><th>操作</th></shiro:hasPermission>
 			</tr>
 		</thead>

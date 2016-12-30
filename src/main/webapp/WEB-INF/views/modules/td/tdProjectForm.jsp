@@ -43,7 +43,7 @@
 			<label class="control-label">是否归档：</label>
 			<div class="controls">
 				<form:select path="isArchive" class="input-xlarge ">
-					<form:option value="" label=""/>
+					<form:option value="-1" label="--请选择--"/>
 					<form:options items="${fns:getDictList('is_archive')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
 				</form:select>
 			</div>

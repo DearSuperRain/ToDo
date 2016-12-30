@@ -86,13 +86,7 @@
 				<th>任务结束日期</th>
 				<th>所属群组</th>
 				<th>所属项目</th>
-				<th>任务标签</th>
-				<th>任务地点</th>
 				<th>任务状态</th>
-				<th>是否提醒</th>
-				<th>是否重复</th>
-				<th>任务备注</th>
-				<th>任务总结</th>
 				<shiro:hasPermission name="td:tdTask:edit"><th>操作</th></shiro:hasPermission>
 			</tr>
 		</thead>
@@ -121,25 +115,7 @@
 					${fns:getDictLabel(tdTask.locationProject, '', '')}
 				</td>
 				<td>
-					${fns:getDictLabel(tdTask.taskLabel, '', '')}
-				</td>
-				<td>
-					${fns:getDictLabel(tdTask.taskSite, '', '')}
-				</td>
-				<td>
 					${fns:getDictLabel(tdTask.taskStatus, 'task_status', '')}
-				</td>
-				<td>
-					${fns:getDictLabel(tdTask.isRemind, 'is_remind', '')}
-				</td>
-				<td>
-					${fns:getDictLabel(tdTask.isRepeat, 'is_repeat', '')}
-				</td>
-				<td>
-					${tdTask.taskRemarks}
-				</td>
-				<td>
-					${tdTask.taskSummary}
 				</td>
 				<shiro:hasPermission name="td:tdTask:edit"><td>
     				<a href="${ctx}/td/tdTask/form?id=${tdTask.id}">修改</a>
