@@ -28,7 +28,7 @@ import com.thinkgem.jeesite.modules.td.label.service.TdLabelService;
  * @version 2016-12-30
  */
 @Controller
-@RequestMapping(value = "${adminPath}/label/tdLabel")
+@RequestMapping(value = "${adminPath}/td/tdLabel")
 public class TdLabelController extends BaseController {
 
 	@Autowired
@@ -46,22 +46,22 @@ public class TdLabelController extends BaseController {
 		return entity;
 	}
 	
-	@RequiresPermissions("label:tdLabel:view")
+	@RequiresPermissions("td:tdLabel:view")
 	@RequestMapping(value = {"list", ""})
 	public String list(TdLabel tdLabel, HttpServletRequest request, HttpServletResponse response, Model model) {
 		Page<TdLabel> page = tdLabelService.findPage(new Page<TdLabel>(request, response), tdLabel); 
 		model.addAttribute("page", page);
-		return "td/label/tdLabelList";
+		return "modules/td/tdLabelList";
 	}
 
-	@RequiresPermissions("label:tdLabel:view")
+	@RequiresPermissions("td:tdLabel:view")
 	@RequestMapping(value = "form")
 	public String form(TdLabel tdLabel, Model model) {
 		model.addAttribute("tdLabel", tdLabel);
-		return "td/label/tdLabelForm";
+		return "modules/td/tdLabelForm";
 	}
 
-	@RequiresPermissions("label:tdLabel:edit")
+	@RequiresPermissions("td:tdLabel:edit")
 	@RequestMapping(value = "save")
 	public String save(TdLabel tdLabel, Model model, RedirectAttributes redirectAttributes) {
 		if (!beanValidator(model, tdLabel)){
@@ -69,15 +69,15 @@ public class TdLabelController extends BaseController {
 		}
 		tdLabelService.save(tdLabel);
 		addMessage(redirectAttributes, "保存标签信息成功");
-		return "redirect:"+Global.getAdminPath()+"/label/tdLabel/?repage";
+		return "redirect:"+Global.getAdminPath()+"/td/tdLabel/?repage";
 	}
 	
-	@RequiresPermissions("label:tdLabel:edit")
+	@RequiresPermissions("td:tdLabel:edit")
 	@RequestMapping(value = "delete")
 	public String delete(TdLabel tdLabel, RedirectAttributes redirectAttributes) {
 		tdLabelService.delete(tdLabel);
 		addMessage(redirectAttributes, "删除标签信息成功");
-		return "redirect:"+Global.getAdminPath()+"/label/tdLabel/?repage";
+		return "redirect:"+Global.getAdminPath()+"/td/tdLabel/?repage";
 	}
 
 }

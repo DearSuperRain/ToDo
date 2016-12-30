@@ -27,10 +27,10 @@
 </head>
 <body>
 	<ul class="nav nav-tabs">
-		<li><a href="${ctx}/site/tdSite/">地点信息列表</a></li>
-		<li class="active"><a href="${ctx}/site/tdSite/form?id=${tdSite.id}">地点信息<shiro:hasPermission name="site:tdSite:edit">${not empty tdSite.id?'修改':'添加'}</shiro:hasPermission><shiro:lacksPermission name="site:tdSite:edit">查看</shiro:lacksPermission></a></li>
+		<li><a href="${ctx}/td/tdSite/">地点信息列表</a></li>
+		<li class="active"><a href="${ctx}/td/tdSite/form?id=${tdSite.id}">地点信息<shiro:hasPermission name="td:tdSite:edit">${not empty tdSite.id?'修改':'添加'}</shiro:hasPermission><shiro:lacksPermission name="td:tdSite:edit">查看</shiro:lacksPermission></a></li>
 	</ul><br/>
-	<form:form id="inputForm" modelAttribute="tdSite" action="${ctx}/site/tdSite/save" method="post" class="form-horizontal">
+	<form:form id="inputForm" modelAttribute="tdSite" action="${ctx}/td/tdSite/save" method="post" class="form-horizontal">
 		<form:hidden path="id"/>
 		<sys:message content="${message}"/>		
 		<div class="control-group">
@@ -39,14 +39,8 @@
 				<form:textarea path="name" htmlEscape="false" rows="4" maxlength="64" class="input-xxlarge "/>
 			</div>
 		</div>
-		<div class="control-group">
-			<label class="control-label">备注信息：</label>
-			<div class="controls">
-				<form:textarea path="remarks" htmlEscape="false" rows="4" maxlength="255" class="input-xxlarge "/>
-			</div>
-		</div>
 		<div class="form-actions">
-			<shiro:hasPermission name="site:tdSite:edit"><input id="btnSubmit" class="btn btn-primary" type="submit" value="保 存"/>&nbsp;</shiro:hasPermission>
+			<shiro:hasPermission name="td:tdSite:edit"><input id="btnSubmit" class="btn btn-primary" type="submit" value="保 存"/>&nbsp;</shiro:hasPermission>
 			<input id="btnCancel" class="btn" type="button" value="返 回" onclick="history.go(-1)"/>
 		</div>
 	</form:form>

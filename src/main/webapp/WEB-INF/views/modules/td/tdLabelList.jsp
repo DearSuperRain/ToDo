@@ -2,7 +2,7 @@
 <%@ include file="/WEB-INF/views/include/taglib.jsp"%>
 <html>
 <head>
-	<title>地点信息管理</title>
+	<title>标签信息管理</title>
 	<meta name="decorator" content="default"/>
 	<script type="text/javascript">
 		$(document).ready(function() {
@@ -18,14 +18,14 @@
 </head>
 <body>
 	<ul class="nav nav-tabs">
-		<li class="active"><a href="${ctx}/site/tdSite/">地点信息列表</a></li>
-		<shiro:hasPermission name="site:tdSite:edit"><li><a href="${ctx}/site/tdSite/form">地点信息添加</a></li></shiro:hasPermission>
+		<li class="active"><a href="${ctx}/td/tdLabel/">标签信息列表</a></li>
+		<shiro:hasPermission name="td:tdLabel:edit"><li><a href="${ctx}/td/tdLabel/form">标签信息添加</a></li></shiro:hasPermission>
 	</ul>
-	<form:form id="searchForm" modelAttribute="tdSite" action="${ctx}/site/tdSite/" method="post" class="breadcrumb form-search">
+	<form:form id="searchForm" modelAttribute="tdLabel" action="${ctx}/td/tdLabel/" method="post" class="breadcrumb form-search">
 		<input id="pageNo" name="pageNo" type="hidden" value="${page.pageNo}"/>
 		<input id="pageSize" name="pageSize" type="hidden" value="${page.pageSize}"/>
 		<ul class="ul-form">
-			<li><label>地点名称：</label>
+			<li><label>标签名称：</label>
 				<form:input path="name" htmlEscape="false" maxlength="64" class="input-medium"/>
 			</li>
 			<li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" value="查询"/></li>
@@ -36,27 +36,27 @@
 	<table id="contentTable" class="table table-striped table-bordered table-condensed">
 		<thead>
 			<tr>
-				<th>地点名称</th>
-				<th>更新时间</th>
+				<th>序号</th>
+				<th>标签名称</th>
 				<th>备注信息</th>
-				<shiro:hasPermission name="site:tdSite:edit"><th>操作</th></shiro:hasPermission>
+				<shiro:hasPermission name="td:tdLabel:edit"><th>操作</th></shiro:hasPermission>
 			</tr>
 		</thead>
 		<tbody>
-		<c:forEach items="${page.list}" var="tdSite">
+		<c:forEach items="${page.list}" var="tdLabel" varStatus="var">
 			<tr>
-				<td><a href="${ctx}/site/tdSite/form?id=${tdSite.id}">
-					${tdSite.name}
+				<td>
+					${var.index+1}
+				</td>
+				<td><a href="${ctx}/td/tdLabel/form?id=${tdLabel.id}">
+					${tdLabel.name}
 				</a></td>
 				<td>
-					<fmt:formatDate value="${tdSite.updateDate}" pattern="yyyy-MM-dd HH:mm:ss"/>
+					${tdLabel.remarks}
 				</td>
-				<td>
-					${tdSite.remarks}
-				</td>
-				<shiro:hasPermission name="site:tdSite:edit"><td>
-    				<a href="${ctx}/site/tdSite/form?id=${tdSite.id}">修改</a>
-					<a href="${ctx}/site/tdSite/delete?id=${tdSite.id}" onclick="return confirmx('确认要删除该地点信息吗？', this.href)">删除</a>
+				<shiro:hasPermission name="td:tdLabel:edit"><td>
+    				<a href="${ctx}/td/tdLabel/form?id=${tdLabel.id}">修改</a>
+					<a href="${ctx}/td/tdLabel/delete?id=${tdLabel.id}" onclick="return confirmx('确认要删除该标签信息吗？', this.href)">删除</a>
 				</td></shiro:hasPermission>
 			</tr>
 		</c:forEach>

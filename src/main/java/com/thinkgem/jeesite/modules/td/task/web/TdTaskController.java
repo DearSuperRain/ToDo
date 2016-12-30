@@ -28,7 +28,7 @@ import com.thinkgem.jeesite.modules.td.task.service.TdTaskService;
  * @version 2016-12-30
  */
 @Controller
-@RequestMapping(value = "${adminPath}/task/tdTask")
+@RequestMapping(value = "${adminPath}/td/tdTask")
 public class TdTaskController extends BaseController {
 
 	@Autowired
@@ -46,22 +46,22 @@ public class TdTaskController extends BaseController {
 		return entity;
 	}
 	
-	@RequiresPermissions("task:tdTask:view")
+	@RequiresPermissions("td:tdTask:view")
 	@RequestMapping(value = {"list", ""})
 	public String list(TdTask tdTask, HttpServletRequest request, HttpServletResponse response, Model model) {
 		Page<TdTask> page = tdTaskService.findPage(new Page<TdTask>(request, response), tdTask); 
 		model.addAttribute("page", page);
-		return "td/task/tdTaskList";
+		return "modules/td/tdTaskList";
 	}
 
-	@RequiresPermissions("task:tdTask:view")
+	@RequiresPermissions("td:tdTask:view")
 	@RequestMapping(value = "form")
 	public String form(TdTask tdTask, Model model) {
 		model.addAttribute("tdTask", tdTask);
-		return "td/task/tdTaskForm";
+		return "modules/td/tdTaskForm";
 	}
 
-	@RequiresPermissions("task:tdTask:edit")
+	@RequiresPermissions("td:tdTask:edit")
 	@RequestMapping(value = "save")
 	public String save(TdTask tdTask, Model model, RedirectAttributes redirectAttributes) {
 		if (!beanValidator(model, tdTask)){
@@ -69,15 +69,15 @@ public class TdTaskController extends BaseController {
 		}
 		tdTaskService.save(tdTask);
 		addMessage(redirectAttributes, "保存任务信息成功");
-		return "redirect:"+Global.getAdminPath()+"/task/tdTask/?repage";
+		return "redirect:"+Global.getAdminPath()+"/td/tdTask/?repage";
 	}
 	
-	@RequiresPermissions("task:tdTask:edit")
+	@RequiresPermissions("td:tdTask:edit")
 	@RequestMapping(value = "delete")
 	public String delete(TdTask tdTask, RedirectAttributes redirectAttributes) {
 		tdTaskService.delete(tdTask);
 		addMessage(redirectAttributes, "删除任务信息成功");
-		return "redirect:"+Global.getAdminPath()+"/task/tdTask/?repage";
+		return "redirect:"+Global.getAdminPath()+"/td/tdTask/?repage";
 	}
 
 }

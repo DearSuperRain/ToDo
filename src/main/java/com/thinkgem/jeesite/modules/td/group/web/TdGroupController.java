@@ -28,7 +28,7 @@ import com.thinkgem.jeesite.modules.td.group.service.TdGroupService;
  * @version 2016-12-30
  */
 @Controller
-@RequestMapping(value = "${adminPath}/group/tdGroup")
+@RequestMapping(value = "${adminPath}/td/tdGroup")
 public class TdGroupController extends BaseController {
 
 	@Autowired
@@ -46,22 +46,22 @@ public class TdGroupController extends BaseController {
 		return entity;
 	}
 	
-	@RequiresPermissions("group:tdGroup:view")
+	@RequiresPermissions("td:tdGroup:view")
 	@RequestMapping(value = {"list", ""})
 	public String list(TdGroup tdGroup, HttpServletRequest request, HttpServletResponse response, Model model) {
 		Page<TdGroup> page = tdGroupService.findPage(new Page<TdGroup>(request, response), tdGroup); 
 		model.addAttribute("page", page);
-		return "td/group/tdGroupList";
+		return "modules/td/tdGroupList";
 	}
 
-	@RequiresPermissions("group:tdGroup:view")
+	@RequiresPermissions("td:tdGroup:view")
 	@RequestMapping(value = "form")
 	public String form(TdGroup tdGroup, Model model) {
 		model.addAttribute("tdGroup", tdGroup);
-		return "td/group/tdGroupForm";
+		return "modules/td/tdGroupForm";
 	}
 
-	@RequiresPermissions("group:tdGroup:edit")
+	@RequiresPermissions("td:tdGroup:edit")
 	@RequestMapping(value = "save")
 	public String save(TdGroup tdGroup, Model model, RedirectAttributes redirectAttributes) {
 		if (!beanValidator(model, tdGroup)){
@@ -69,15 +69,15 @@ public class TdGroupController extends BaseController {
 		}
 		tdGroupService.save(tdGroup);
 		addMessage(redirectAttributes, "保存群组信息成功");
-		return "redirect:"+Global.getAdminPath()+"/group/tdGroup/?repage";
+		return "redirect:"+Global.getAdminPath()+"/td/tdGroup/?repage";
 	}
 	
-	@RequiresPermissions("group:tdGroup:edit")
+	@RequiresPermissions("td:tdGroup:edit")
 	@RequestMapping(value = "delete")
 	public String delete(TdGroup tdGroup, RedirectAttributes redirectAttributes) {
 		tdGroupService.delete(tdGroup);
 		addMessage(redirectAttributes, "删除群组信息成功");
-		return "redirect:"+Global.getAdminPath()+"/group/tdGroup/?repage";
+		return "redirect:"+Global.getAdminPath()+"/td/tdGroup/?repage";
 	}
 
 }

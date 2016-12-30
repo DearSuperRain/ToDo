@@ -28,7 +28,7 @@ import com.thinkgem.jeesite.modules.td.site.service.TdSiteService;
  * @version 2016-12-30
  */
 @Controller
-@RequestMapping(value = "${adminPath}/site/tdSite")
+@RequestMapping(value = "${adminPath}/td/tdSite")
 public class TdSiteController extends BaseController {
 
 	@Autowired
@@ -46,22 +46,22 @@ public class TdSiteController extends BaseController {
 		return entity;
 	}
 	
-	@RequiresPermissions("site:tdSite:view")
+	@RequiresPermissions("td:tdSite:view")
 	@RequestMapping(value = {"list", ""})
 	public String list(TdSite tdSite, HttpServletRequest request, HttpServletResponse response, Model model) {
 		Page<TdSite> page = tdSiteService.findPage(new Page<TdSite>(request, response), tdSite); 
 		model.addAttribute("page", page);
-		return "td/site/tdSiteList";
+		return "modules/td/tdSiteList";
 	}
 
-	@RequiresPermissions("site:tdSite:view")
+	@RequiresPermissions("td:tdSite:view")
 	@RequestMapping(value = "form")
 	public String form(TdSite tdSite, Model model) {
 		model.addAttribute("tdSite", tdSite);
-		return "td/site/tdSiteForm";
+		return "modules/td/tdSiteForm";
 	}
 
-	@RequiresPermissions("site:tdSite:edit")
+	@RequiresPermissions("td:tdSite:edit")
 	@RequestMapping(value = "save")
 	public String save(TdSite tdSite, Model model, RedirectAttributes redirectAttributes) {
 		if (!beanValidator(model, tdSite)){
@@ -69,7 +69,7 @@ public class TdSiteController extends BaseController {
 		}
 		tdSiteService.save(tdSite);
 		addMessage(redirectAttributes, "保存地点信息成功");
-		return "redirect:"+Global.getAdminPath()+"/site/tdSite/?repage";
+		return "redirect:"+Global.getAdminPath()+"/td/tdSite/?repage";
 	}
 	
 	@RequiresPermissions("site:tdSite:edit")
@@ -77,7 +77,7 @@ public class TdSiteController extends BaseController {
 	public String delete(TdSite tdSite, RedirectAttributes redirectAttributes) {
 		tdSiteService.delete(tdSite);
 		addMessage(redirectAttributes, "删除地点信息成功");
-		return "redirect:"+Global.getAdminPath()+"/site/tdSite/?repage";
+		return "redirect:"+Global.getAdminPath()+"/td/tdSite/?repage";
 	}
 
 }

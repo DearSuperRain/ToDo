@@ -2,7 +2,7 @@
 <%@ include file="/WEB-INF/views/include/taglib.jsp"%>
 <html>
 <head>
-	<title>群组信息管理</title>
+	<title>地点信息管理</title>
 	<meta name="decorator" content="default"/>
 	<script type="text/javascript">
 		$(document).ready(function() {
@@ -18,14 +18,14 @@
 </head>
 <body>
 	<ul class="nav nav-tabs">
-		<li class="active"><a href="${ctx}/group/tdGroup/">群组信息列表</a></li>
-		<shiro:hasPermission name="group:tdGroup:edit"><li><a href="${ctx}/group/tdGroup/form">群组信息添加</a></li></shiro:hasPermission>
+		<li class="active"><a href="${ctx}/td/tdSite/">地点信息列表</a></li>
+		<shiro:hasPermission name="td:tdSite:edit"><li><a href="${ctx}/td/tdSite/form">地点信息添加</a></li></shiro:hasPermission>
 	</ul>
-	<form:form id="searchForm" modelAttribute="tdGroup" action="${ctx}/group/tdGroup/" method="post" class="breadcrumb form-search">
+	<form:form id="searchForm" modelAttribute="tdSite" action="${ctx}/td/tdSite/" method="post" class="breadcrumb form-search">
 		<input id="pageNo" name="pageNo" type="hidden" value="${page.pageNo}"/>
 		<input id="pageSize" name="pageSize" type="hidden" value="${page.pageSize}"/>
 		<ul class="ul-form">
-			<li><label>群组名称：</label>
+			<li><label>地点名称：</label>
 				<form:input path="name" htmlEscape="false" maxlength="64" class="input-medium"/>
 			</li>
 			<li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" value="查询"/></li>
@@ -36,31 +36,25 @@
 	<table id="contentTable" class="table table-striped table-bordered table-condensed">
 		<thead>
 			<tr>
-				<th>群组名称</th>
-				<th>群组说明</th>
+				<th>序号</th>
+				<th>地点名称</th>
 				<th>更新时间</th>
 				<th>备注信息</th>
-				<shiro:hasPermission name="group:tdGroup:edit"><th>操作</th></shiro:hasPermission>
+				<shiro:hasPermission name="td:tdSite:edit"><th>操作</th></shiro:hasPermission>
 			</tr>
 		</thead>
 		<tbody>
-		<c:forEach items="${page.list}" var="tdGroup">
+		<c:forEach items="${page.list}" var="tdSite" varStatus="var">
 			<tr>
-				<td><a href="${ctx}/group/tdGroup/form?id=${tdGroup.id}">
-					${tdGroup.name}
+				<td>
+					${var.index+1}
+				</td>
+				<td><a href="${ctx}/td/tdSite/form?id=${tdSite.id}">
+					${tdSite.name}
 				</a></td>
-				<td>
-					${tdGroup.introduction}
-				</td>
-				<td>
-					<fmt:formatDate value="${tdGroup.updateDate}" pattern="yyyy-MM-dd HH:mm:ss"/>
-				</td>
-				<td>
-					${tdGroup.remarks}
-				</td>
-				<shiro:hasPermission name="group:tdGroup:edit"><td>
-    				<a href="${ctx}/group/tdGroup/form?id=${tdGroup.id}">修改</a>
-					<a href="${ctx}/group/tdGroup/delete?id=${tdGroup.id}" onclick="return confirmx('确认要删除该群组信息吗？', this.href)">删除</a>
+				<shiro:hasPermission name="td:tdSite:edit"><td>
+    				<a href="${ctx}/td/tdSite/form?id=${tdSite.id}">修改</a>
+					<a href="${ctx}/td/tdSite/delete?id=${tdSite.id}" onclick="return confirmx('确认要删除该地点信息吗？', this.href)">删除</a>
 				</td></shiro:hasPermission>
 			</tr>
 		</c:forEach>

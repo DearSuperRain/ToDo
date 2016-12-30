@@ -28,7 +28,7 @@ import com.thinkgem.jeesite.modules.td.project.service.TdProjectService;
  * @version 2016-12-30
  */
 @Controller
-@RequestMapping(value = "${adminPath}/project/tdProject")
+@RequestMapping(value = "${adminPath}/td/tdProject")
 public class TdProjectController extends BaseController {
 
 	@Autowired
@@ -46,22 +46,22 @@ public class TdProjectController extends BaseController {
 		return entity;
 	}
 	
-	@RequiresPermissions("project:tdProject:view")
+	@RequiresPermissions("td:tdProject:view")
 	@RequestMapping(value = {"list", ""})
 	public String list(TdProject tdProject, HttpServletRequest request, HttpServletResponse response, Model model) {
 		Page<TdProject> page = tdProjectService.findPage(new Page<TdProject>(request, response), tdProject); 
 		model.addAttribute("page", page);
-		return "td/project/tdProjectList";
+		return "modules/td/tdProjectList";
 	}
 
-	@RequiresPermissions("project:tdProject:view")
+	@RequiresPermissions("td:tdProject:view")
 	@RequestMapping(value = "form")
 	public String form(TdProject tdProject, Model model) {
 		model.addAttribute("tdProject", tdProject);
-		return "td/project/tdProjectForm";
+		return "modules/td/tdProjectForm";
 	}
 
-	@RequiresPermissions("project:tdProject:edit")
+	@RequiresPermissions("td:tdProject:edit")
 	@RequestMapping(value = "save")
 	public String save(TdProject tdProject, Model model, RedirectAttributes redirectAttributes) {
 		if (!beanValidator(model, tdProject)){
@@ -69,15 +69,15 @@ public class TdProjectController extends BaseController {
 		}
 		tdProjectService.save(tdProject);
 		addMessage(redirectAttributes, "保存项目信息成功");
-		return "redirect:"+Global.getAdminPath()+"/project/tdProject/?repage";
+		return "redirect:"+Global.getAdminPath()+"/td/tdProject/?repage";
 	}
 	
-	@RequiresPermissions("project:tdProject:edit")
+	@RequiresPermissions("td:tdProject:edit")
 	@RequestMapping(value = "delete")
 	public String delete(TdProject tdProject, RedirectAttributes redirectAttributes) {
 		tdProjectService.delete(tdProject);
 		addMessage(redirectAttributes, "删除项目信息成功");
-		return "redirect:"+Global.getAdminPath()+"/project/tdProject/?repage";
+		return "redirect:"+Global.getAdminPath()+"/td/tdProject/?repage";
 	}
 
 }
