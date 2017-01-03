@@ -40,17 +40,17 @@
 					onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:false});"/>
 			</li>
 			<li><label>所属群组：</label>
-				<form:select path="locationGroup" class="input-medium" style="width:110px;">
+				<form:select path="locationGroup" class="input-xlarge "style="width:120px">
 					<form:option value="-1" label="--请选择--"/>
-					<form:options items="${fns:getDictList('')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
+					<form:options items="${groups}" itemLabel="name" itemValue="id" htmlEscape="false"/>
 				</form:select>
 			</li>
 		</ul>
 		<ul class="ul-form">
 			<li><label>所属项目：</label>
-				<form:select path="locationProject" class="input-medium" style="width:110px;">
+				<form:select path="locationProject" class="input-xlarge "style="width:120px">
 					<form:option value="-1" label="--请选择--"/>
-					<form:options items="${fns:getDictList('')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
+					<form:options items="${projects}" itemLabel="name" itemValue="id" htmlEscape="false"/>
 				</form:select>
 			</li>
 			<li><label>任务状态：</label>
@@ -86,6 +86,8 @@
 				<th>任务结束日期</th>
 				<th>所属群组</th>
 				<th>所属项目</th>
+				<th>任务标签</th>
+				<th>任务地点</th>
 				<th>任务状态</th>
 				<shiro:hasPermission name="td:tdTask:edit"><th>操作</th></shiro:hasPermission>
 			</tr>
@@ -109,10 +111,16 @@
 					<fmt:formatDate value="${tdTask.endDate}" pattern="yyyy-MM-dd HH:mm:ss"/>
 				</td>
 				<td>
-					${fns:getDictLabel(tdTask.locationGroup, '', '')}
+					${tdTask.groupName}
 				</td>
 				<td>
-					${fns:getDictLabel(tdTask.locationProject, '', '')}
+					${tdTask.projectName}
+				</td>
+				<td>
+					${tdTask.labelName}
+				</td>
+				<td>
+					${tdTask.siteName}
 				</td>
 				<td>
 					${fns:getDictLabel(tdTask.taskStatus, 'task_status', '')}

@@ -31,6 +31,11 @@ public class TdTask extends DataEntity<TdTask> {
 	private String taskRemarks;		// 任务备注
 	private String taskSummary;		// 任务总结
 	
+	private String groupName;	//群组名
+	private String projectName;	//群组名
+	private String labelName;	//群组名
+	private String siteName;	//群组名
+	
 	public TdTask() {
 		super();
 	}
@@ -151,5 +156,38 @@ public class TdTask extends DataEntity<TdTask> {
 	public void setTaskSummary(String taskSummary) {
 		this.taskSummary = taskSummary;
 	}
+
+	public String getGroupName() {
+		return groupName;
+	}
+
+	public void setGroupName(String groupName) {
+		this.groupName = groupName;
+	}
+
+	public String getProjectName() {
+		return projectName;
+	}
+
+	public void setProjectName(String projectName) {
+		this.projectName = projectName;
+	}
+
+	public String getLabelName() {
+		return labelName;
+	}
+
+	public void setLabelName(String labelName) {
+		this.labelName = labelName;
+	}
+
+	public String getSiteName() {
+		return siteName;
+	}
+
+	public void setSiteName(String siteName) {
+		this.siteName = siteName;
+	}
+	
 	
 }

@@ -22,10 +22,18 @@
 		a.update_by AS "updateBy.id",
 		a.update_date AS "updateDate",
 		a.remarks AS "remarks",
-		a.del_flag AS "delFlag"
+		a.del_flag AS "delFlag",
+		b.name AS "groupName",
+		c.name AS "projectName",
+		d.name AS "labelName",
+		e.name AS "siteName"
 	</sql>
 	
 	<sql id="tdTaskJoins">
+		LEFT JOIN td_group b ON a.location_group = b.id
+		LEFT JOIN td_project c ON a.location_project = c.id
+		LEFT JOIN td_label d ON a.task_label = d.id
+		LEFT JOIN td_site e ON a.task_site = e.id
 	</sql>
     
 	<select id="get" resultType="TdTask">
@@ -47,7 +55,7 @@
 				AND a.task_content LIKE 
 					<if test="dbName == 'oracle'">'%'||#{taskContent}||'%'</if>
 					<if test="dbName == 'mssql'">'%'+#{taskContent}+'%'</if>
-					<if test="dbName == 'mysql'">concat('%',#{taskContent},'%')</if>
+					<if test="dbName == 'mysql'">CONCAT('%',#{taskContent},'%')</if>
 			</if>
 			<if test="fourQuadrant != null and fourQuadrant != ''">
 				AND a.four_quadrant = #{fourQuadrant}
