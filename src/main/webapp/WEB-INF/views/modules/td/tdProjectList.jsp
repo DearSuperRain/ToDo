@@ -55,7 +55,7 @@
 				<td>
 					${var.index+1}
 				</td>
-				<td><a href="${ctx}/td/tdProject/form?id=${tdProject.id}">
+				<td><a href="${ctx}/td/tdProject/view?id=${tdProject.id}">
 					${tdProject.name}
 				</a></td>
 				<td>
@@ -65,6 +65,7 @@
 					${tdProject.introduction}
 				</td>
 				<shiro:hasPermission name="td:tdProject:edit"><td>
+    				<a href="${ctx}/td/tdProject/view?id=${tdProject.id}">查看</a>
     				<a href="${ctx}/td/tdProject/form?id=${tdProject.id}">修改</a>
 					<a href="${ctx}/td/tdProject/delete?id=${tdProject.id}" onclick="return confirmx('确认要删除该项目信息吗？', this.href)">删除</a>
 				</td></shiro:hasPermission>

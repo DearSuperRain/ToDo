@@ -47,10 +47,11 @@
 				<td>
 					${var.index+1}
 				</td>
-				<td><a href="${ctx}/td/tdSite/form?id=${tdSite.id}">
+				<td><a href="${ctx}/td/tdSite/view?id=${tdSite.id}">
 					${tdSite.name}
 				</a></td>
 				<shiro:hasPermission name="td:tdSite:edit"><td>
+    				<a href="${ctx}/td/tdSite/view?id=${tdSite.id}">查看</a>
     				<a href="${ctx}/td/tdSite/form?id=${tdSite.id}">修改</a>
 					<a href="${ctx}/td/tdSite/delete?id=${tdSite.id}" onclick="return confirmx('确认要删除该地点信息吗？', this.href)">删除</a>
 				</td></shiro:hasPermission>

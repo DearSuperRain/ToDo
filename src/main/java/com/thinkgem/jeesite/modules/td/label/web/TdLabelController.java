@@ -60,6 +60,13 @@ public class TdLabelController extends BaseController {
 		model.addAttribute("tdLabel", tdLabel);
 		return "modules/td/tdLabelForm";
 	}
+	
+	@RequiresPermissions("td:tdLabel:view")
+	@RequestMapping(value = "view")
+	public String view(TdLabel tdLabel, Model model) {
+		model.addAttribute("tdLabel", tdLabel);
+		return "modules/td/tdLabelView";
+	}
 
 	@RequiresPermissions("td:tdLabel:edit")
 	@RequestMapping(value = "save")

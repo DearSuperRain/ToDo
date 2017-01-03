@@ -100,6 +100,33 @@ public class TdTaskController extends BaseController {
 		model.addAttribute("tdTask", tdTask);
 		return "modules/td/tdTaskForm";
 	}
+	
+	@RequiresPermissions("td:tdTask:view")
+	@RequestMapping(value = "view")
+	public String view(TdTask tdTask, Model model) {
+		/*//获取群组列表信息
+		TdGroup tdGroup = new TdGroup();
+		java.util.List<TdGroup> groups = tdGroupService.findList(tdGroup);
+		model.addAttribute("groups", groups);
+		
+		//获取项目列表信息
+		TdProject tdProject = new TdProject();
+		java.util.List<TdProject> projects = tdProjectService.findList(tdProject);
+		model.addAttribute("projects", projects);
+		
+		//获取标签信息列表
+		TdLabel tdLabel = new TdLabel();
+		java.util.List<TdLabel> labels = tdLabelService.findList(tdLabel);
+		model.addAttribute("labels", labels);
+		
+		//获取地点信息列表
+		TdSite tdSite = new TdSite();
+		java.util.List<TdSite> sites = tdSiteService.findList(tdSite);
+		model.addAttribute("sites",sites);
+		*/
+		model.addAttribute("tdTask", tdTask);
+		return "modules/td/tdTaskView";
+	}
 
 	@RequiresPermissions("td:tdTask:edit")
 	@RequestMapping(value = "save")

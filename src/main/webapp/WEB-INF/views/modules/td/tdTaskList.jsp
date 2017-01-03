@@ -98,7 +98,7 @@
 				<td>
 					${var.index+1}
 				</td>
-				<td><a href="${ctx}/td/tdTask/form?id=${tdTask.id}">
+				<td><a href="${ctx}/td/tdTask/view?id=${tdTask.id}">
 					${tdTask.taskContent}
 				</a></td>
 				<td>
@@ -126,6 +126,7 @@
 					${fns:getDictLabel(tdTask.taskStatus, 'task_status', '')}
 				</td>
 				<shiro:hasPermission name="td:tdTask:edit"><td>
+    				<a href="${ctx}/td/tdTask/view?id=${tdTask.id}">查看</a>
     				<a href="${ctx}/td/tdTask/form?id=${tdTask.id}">修改</a>
 					<a href="${ctx}/td/tdTask/delete?id=${tdTask.id}" onclick="return confirmx('确认要删除该任务信息吗？', this.href)">删除</a>
 				</td></shiro:hasPermission>

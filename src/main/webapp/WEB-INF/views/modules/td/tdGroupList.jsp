@@ -48,13 +48,14 @@
 				<td>
 					${var.index+1}
 				</td>
-				<td><a href="${ctx}/td/tdGroup/form?id=${tdGroup.id}">
+				<td><a href="${ctx}/td/tdGroup/view?id=${tdGroup.id}">
 					${tdGroup.name}
 				</a></td>
 				<td>
 					${tdGroup.introduction}
 				</td>
 				<shiro:hasPermission name="td:tdGroup:edit"><td>
+    				<a href="${ctx}/td/tdGroup/view?id=${tdGroup.id}">查看</a>
     				<a href="${ctx}/td/tdGroup/form?id=${tdGroup.id}">修改</a>
 					<a href="${ctx}/td/tdGroup/delete?id=${tdGroup.id}" onclick="return confirmx('确认要删除该群组信息吗？', this.href)">删除</a>
 				</td></shiro:hasPermission>

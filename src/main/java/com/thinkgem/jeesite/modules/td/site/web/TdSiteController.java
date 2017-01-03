@@ -60,6 +60,13 @@ public class TdSiteController extends BaseController {
 		model.addAttribute("tdSite", tdSite);
 		return "modules/td/tdSiteForm";
 	}
+	
+	@RequiresPermissions("td:tdSite:view")
+	@RequestMapping(value = "view")
+	public String view(TdSite tdSite, Model model) {
+		model.addAttribute("tdSite", tdSite);
+		return "modules/td/tdSiteView";
+	}
 
 	@RequiresPermissions("td:tdSite:edit")
 	@RequestMapping(value = "save")

@@ -48,13 +48,14 @@
 				<td>
 					${var.index+1}
 				</td>
-				<td><a href="${ctx}/td/tdLabel/form?id=${tdLabel.id}">
+				<td><a href="${ctx}/td/tdLabel/view?id=${tdLabel.id}">
 					${tdLabel.name}
 				</a></td>
 				<td>
 					${tdLabel.remarks}
 				</td>
 				<shiro:hasPermission name="td:tdLabel:edit"><td>
+    				<a href="${ctx}/td/tdLabel/view?id=${tdLabel.id}">查看</a>
     				<a href="${ctx}/td/tdLabel/form?id=${tdLabel.id}">修改</a>
 					<a href="${ctx}/td/tdLabel/delete?id=${tdLabel.id}" onclick="return confirmx('确认要删除该标签信息吗？', this.href)">删除</a>
 				</td></shiro:hasPermission>

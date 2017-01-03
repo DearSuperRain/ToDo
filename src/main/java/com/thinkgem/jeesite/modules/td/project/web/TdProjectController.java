@@ -60,6 +60,13 @@ public class TdProjectController extends BaseController {
 		model.addAttribute("tdProject", tdProject);
 		return "modules/td/tdProjectForm";
 	}
+	
+	@RequiresPermissions("td:tdProject:view")
+	@RequestMapping(value = "view")
+	public String view(TdProject tdProject, Model model) {
+		model.addAttribute("tdProject", tdProject);
+		return "modules/td/tdProjectView";
+	}
 
 	@RequiresPermissions("td:tdProject:edit")
 	@RequestMapping(value = "save")

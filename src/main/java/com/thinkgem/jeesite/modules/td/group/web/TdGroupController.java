@@ -60,6 +60,13 @@ public class TdGroupController extends BaseController {
 		model.addAttribute("tdGroup", tdGroup);
 		return "modules/td/tdGroupForm";
 	}
+	
+	@RequiresPermissions("td:tdGroup:view")
+	@RequestMapping(value = "view")
+	public String view(TdGroup tdGroup, Model model) {
+		model.addAttribute("tdGroup", tdGroup);
+		return "modules/td/tdGroupView";
+	}
 
 	@RequiresPermissions("td:tdGroup:edit")
 	@RequestMapping(value = "save")
